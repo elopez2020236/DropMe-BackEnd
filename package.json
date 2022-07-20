@@ -1,0 +1,31 @@
+{
+  "name": "dropme-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elopez2020236/DropMe-BackEnd.git"
+  },
+  "author": "Grupo 3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elopez2020236/DropMe-BackEnd/issues"
+  },
+  "homepage": "https://github.com/elopez2020236/DropMe-BackEnd#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.29.4",
+    "mongoose": "^6.4.5",
+    "nodemo": "^1.0.0",
+    "nodemon": "^2.0.19"
+  }
+}
