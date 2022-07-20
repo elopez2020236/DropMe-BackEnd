@@ -1,7 +1,10 @@
 require('dotenv').config();
 
+
 const mongoose = require('mongoose');
 const app = require('./app');
+
+const usuarioController = require('./src/controller/usuario.controller')
 
 mongoose.Promise = global.Promise;
 mongoose
