@@ -146,7 +146,7 @@ function RegistrarAd(req, res) {
                                 if(err){
                                     return res.status(500).send({message: 'Error general al actualizar'});
                                 }else if(userUpdated){
-                                    return res.send({message: 'Empresa actualizada', userUpdated});
+                                    return res.send({message: 'Usuario actualizado', userUpdated});
                                 }else{
                                     return res.send({message: 'No se pudo actualizar la empresa'});
                                 }
@@ -159,7 +159,7 @@ function RegistrarAd(req, res) {
                             if(err){
                                 return res.status(500).send({message: 'Error general al actualizar'});
                             }else if(userUpdated){
-                                return res.send({message: 'Empresa actualizada', userUpdated});
+                                return res.send({message: 'Usuario Actualozado', userUpdated});
                             }else{
                                 return res.send({message: 'No se pudo actualizar la empresa'});
                             }
