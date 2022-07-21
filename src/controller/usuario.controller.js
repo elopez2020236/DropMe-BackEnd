@@ -197,6 +197,39 @@ function RegistrarAd(req, res) {
     }
 
 
+function ObtenerUsuario(req, res) {
+  Usuario.find({rol:'Usuario'}, (err, usuarioEncontrado) => {
+    return res.status(200).send({ usuario: usuarioEncontrado });
+  });
+}
+
+function ObtenerUsuarioId(req, res) {
+    var idUsuario = req.params.idUsuario;
+  
+    Usuario.findById(idUsuario, (err, usuarioEncontrado) => {
+  if(err){
+    return res.status(500).send({ mensaje:'error en la peticion 1'})
+  }else if(usuarioEncontrado){
+    return res.status(200).send({usuario:usuarioEncontrado})
+  }else{
+    return res.status(500).send({ mensaje:'error al obtener el usuario'})
+  }
+    });
+  }
+
+  function ObterneruserLog(req,res){
+    var user = req.user.sub;
+     Usuario.findById(user,(err,usuarioEncontrado)=>{
+      if(err){
+        return res.status(500).send({ mensaje:'error en la peticion'})
+      }else if (usuarioEncontrado){
+            return res.status(200).send({usario:usuarioEncontrado})
+      }else{
+        return res.send({ mensaje: 'error al obtener '})
+      }
+     })
+  }
+
 
   module.exports ={
     RegistrarAd,
