@@ -204,9 +204,6 @@ function RegistrarAd(req, res) {
     Login,
     EditarUsuario,
     eliminarUsuario,
-
-
-
   }
 
 
