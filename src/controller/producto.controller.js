@@ -77,8 +77,40 @@ function ReProducto(req,res){
     })
 } 
 
+function UpProducto(req,res){
+    var idCat = req.params.idCat;
+    var idPr = req.params.idPr;
+    var parametros = req.body;
+    if(parametros){
+        Producto.findById(idPr,(err,productosEncontrados)=>{
+           if(err) return res.status(500).send({mensaje:'Error en la petición (Producto) :('})
+           if(productosEncontrados){
+             Categoria.findOne({_id: idCat,idPr: idPr},(err,categoriaEncontrada)=>{
+                 if(err) return res.status(500).send({mensaje:'Error en la petición (Categoria) :('});
+                 if(categoriaEncontrada){
+                     Producto.findByIdAndUpdate(idPr, parametros,{new: true},(err,productoActualizado)=>{
+                        if(err) return res.status(500).send({mensaje:''})
+                        if(!productoActualizado){
+                            return res.status(500).send({mensaje:'Error al actualizar producto :( '});
+                        }else{
+                            return res.status(200).send({producto:productoActualizado})
+                        }
+                     })
+                 }
+
+             })
+           }else{
+               return res.status(500).send({mensaje:'El producto no existe :('})
+           }       
+        })
+    }else{
+        return res.status(500).send({mensaje:'Ingrese los parametros obligatorios :/'});
+    }
+}
+
 module.exports ={
     AddProducto,
     GetProducto,
-    ReProducto
+    ReProducto,
+    UpProducto
   }

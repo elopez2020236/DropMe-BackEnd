@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "3b07919c-7d1d-446b-bcf4-df5e5a9cbad2",
+		"name": "DropME",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19217321"
+	},
+	"item": [
+		{
+			"name": "Agregar Categoría",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Chorizo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/addCategoria",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addCategoria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Leche de Bolsita",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "Lacteos",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/addProducto/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"addProducto",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categorias",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Predeterminada",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/getCategorias",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"getCategorias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/getProductos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"getProductos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quitar Producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/62d8e9a47d48e72ef56da2a6/removeProducto/62d8eaaf0b9a7b9ceec04076",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"62d8e9a47d48e72ef56da2a6",
+						"removeProducto",
+						"62d8eaaf0b9a7b9ceec04076"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Leche de Cejotas",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "11",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "Lacteos",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "fotos",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "factura",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/62d8e9a47d48e72ef56da2a6/upProducto/62d8eaeb0b9a7b9ceec04084",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"62d8e9a47d48e72ef56da2a6",
+						"upProducto",
+						"62d8eaeb0b9a7b9ceec04084"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Categoría",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/reCategoria/62d9ff700cf131acca848117",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"reCategoria",
+						"62d9ff700cf131acca848117"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Categoria",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Bellakos",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/upCategoria/62d8e9a47d48e72ef56da2a6",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"upCategoria",
+						"62d8e9a47d48e72ef56da2a6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

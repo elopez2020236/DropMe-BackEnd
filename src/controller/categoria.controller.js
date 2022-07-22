@@ -109,11 +109,38 @@ function RemoveCategoria(req,res){
     })
 }
 
+function UpCategoria(req,res){
+    const idCat = req.params.idCat;
+    const parametros = req.body;
+    if(parametros.nombre){
+        Categoria.findOne({nombre: parametros.nombre},(err, catFind)=>{
+            if(err){
+                return res.status(500).send({message: "Error al encontrar categoria"});
+            }else if(catFind){
+                
+                return res.send({message: "Categoría existente"});
+            }else{
+                Categoria.findByIdAndUpdate(idCat, parametros, {new:true}, (err, categoriaUp)=>{
+                    if(err){
+                        return res.status(500).send({message: "Error al actualizar producto :("});
+                    }else if(categoriaUp){
+                        return res.send({categoria: categoriaUp});
+                    }else{
+                        return res.status(500).send({message: "No se completó la acción :("});
+                    }
+                })
+            }
+        })
+    }else{
+        return res.status(403).send({message: "Ingrese los datos a modificar (Nombre)"});
+    }
+}
 
 
 module.exports = {
     AddCategoria,
     CategoriaDefault,
     GetCategorias,
-    RemoveCategoria
+    RemoveCategoria,
+    UpCategoria
   }
