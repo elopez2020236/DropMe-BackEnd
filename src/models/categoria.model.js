@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var categoriaSchema = ({
     nombre: String,
-    productos: [{type: Schema.ObjectId, ref: "productos"}]
+    productos: [{type: Schema.ObjectId, ref: "Pructos"}]
 })
 
-module.exports = mongoose.model("categoria", categoriaSchema);
+module.exports = mongoose.model("Categoria", categoriaSchema);

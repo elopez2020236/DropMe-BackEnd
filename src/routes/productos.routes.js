@@ -4,7 +4,8 @@ const md_autenticacion = require('../middlewares/autenticacion');
 
 
 const api = express.Router();
-api.put("/addProducto/:idCat", controladorProductos.AddProducto)
-
+api.put("/addProducto/:idCat", controladorProductos.AddProducto);
+api.get("/getProductos", controladorProductos.GetProducto);
+api.put("/:idCat/removeProducto/:idPr", controladorProductos.ReProducto );
 
 module.exports = api;

@@ -58,7 +58,6 @@ function CategoriaDefault(){
 
 }
 
-
 function GetCategorias(req,res){
     Categoria.find({}).populate("productos").exec((err, TdoCategorias)=>{
         if(err){
@@ -72,8 +71,49 @@ function GetCategorias(req,res){
     })
 }
 
+function RemoveCategoria(req,res){
+    const idCat = req.params.idCat;
+    Categoria.findOne({_id : idCat}, (err, categoriaEncontrada)=>{
+        if(err){
+            return res.status(500).send({message: "error en la petion de categoria"});
+        }else if(categoriaEncontrada){
+            var productos = categoriaEncontrada.productos;
+            Categoria.findOneAndUpdate({busqueda: "Default"},{$push:{productos: productos}}, {new: true},(err, categoriaActualizada)=>{
+                if(err){
+                    return res.status(500).send({message: "error al actualizar a Default"});
+                }else if(categoriaActualizada){
+                    Categoria.findOne({_id : idCat},(err, categoriaEncontrada)=>{
+                        if(err){
+                            return res.status(500).send({message: "error en la peticion de la categoria "});
+                        }else if(categoriaEncontrada){
+                            Categoria.findByIdAndRemove(idCat,(err, categoriaEliminada)=>{
+                                if(err){
+                                    return res.status(500).send({message: "error al eliinar la categoria"});
+                                }else if(categoriaEliminada){
+                                    return res.send({categoria: categoriaEliminada});
+                                }else{
+                                    return res.status(404).send({message: "error al eliinar la categoriar"});
+                                }
+                            })
+                        }else{
+                            return res.status(403).send({message: 'error la categoira no existe'});
+                        }
+                    })
+                }else{
+                    return res.status(404).send({message: "error al actualizar"});
+                }
+            })
+        }else{
+            return res.status(403).send({message: "error la categoria no existe"});
+        }
+    })
+}
+
+
+
 module.exports = {
     AddCategoria,
     CategoriaDefault,
-    GetCategorias
+    GetCategorias,
+    RemoveCategoria
   }

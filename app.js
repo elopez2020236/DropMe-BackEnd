@@ -18,7 +18,7 @@ app.use(cors());
 // CARGA DE RUTAS localhost:3000/api/productos
 //app.use("/api", hotelesRoutes, userRoutes, habitacionesRoutes, eventosRoutes, reservacion, servicios, factura,carrito);
 
-app.use("/api",Usuario, Categoria, Productos)
+app.use("/api", Usuario, Categoria, Productos)
 
 
 module.exports = app;

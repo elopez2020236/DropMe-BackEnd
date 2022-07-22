@@ -42,6 +42,43 @@ function AddProducto(req,res){
         return res.status(500).send({mensaje:'Ingrese los datos correctamente :('})
     }
 }
+
+function GetProducto(req,res){
+    Producto.find({}).exec((err, productosEncontrados)=>{
+        if(err){
+            return res.status(500).send({message: "Error al encontrar los productos"});
+        }else if(productosEncontrados){
+            return res.send({message: "Productos: ", productosEncontrados});
+        }else{
+            return res.status(403).send({message: "No se encontraron productos"});
+        }
+    })
+}
+
+function ReProducto(req,res){
+    var idCat = req.params.idCat;
+    var idPr = req.params.idPr;
+    Categoria.findOneAndUpdate({_id:idCat, productos: idPr},{$pull:{productos:idPr}},{idPr: true},(err,categoriaActualizada)=>{
+     if(err) return res.status(500).send({message:'error en la peticion '})
+       if(!categoriaActualizada){
+           Producto.findByIdAndRemove(idPr, (err,productoEliminado)=>{
+              if(err) return res.status(500).send({message:'erro al eliminar el producto'});
+              if(!productoEliminado){
+                   return res.status(500).send({message:'no se elimino el producto'})
+              }else{
+                  return res.status(200).send({productos: productoEliminado})
+              }
+
+           })
+
+       }else{
+           return res.status(500).send({message:'el producto no existe'})
+       }
+    })
+} 
+
 module.exports ={
-    AddProducto
+    AddProducto,
+    GetProducto,
+    ReProducto
   }
