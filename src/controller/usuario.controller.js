@@ -56,27 +56,9 @@ function RegistrarAd(req, res) {
               usuarioModel.save((err, usuarioGuardado) => {
                 if(err) return res.status(500).send({ mensaje:'error en la peticion 1'});
                 else if(usuarioGuardado) {
-                  var carritoModel = new Carrito();
-  
-                  carritoModel.Usuario = usuarioGuardado._id;
-                  carritoModel.Habitaciones= null;
-                  carritoModel.Servicios = [];
-                  carritoModel.subTotal = null;
-                  carritoModel.save((err,carridoCreado)=>{
-  
-                    if(err) return res.status(500).send({ mensaje:'error en la petcion 2'});
-                    else if (carridoCreado){
-  
-                      return res.status(200).send({mensaje:'se agreo el carrito y el usuario correctamente',usuarioGuardado})
-  
-                    }else{
-                      return res.send({ mensaje:'error al crear carrito'})
-                    }
-  
-                  })
-  
-  
-                }else{
+
+                  return res.status(200).send({mensaje:'se agrego el usuario Correctamente',usuarioGuardado})
+            }else{
                   return res.send({ mensaje: 'error al guardar el usuario' })
                 }
              });
