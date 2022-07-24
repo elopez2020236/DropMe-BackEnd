@@ -6,7 +6,8 @@ const PructosSchema = Schema({
   category: String,
   precio: String,
   fotos:[],
-  factura:[{ type: Schema.Types.ObjectId, ref: 'Pructos'}]
+  factura:[{ type: Schema.Types.ObjectId, ref: 'Pructos'}],
+  usuario:{ type: Schema.Types.ObjectId, ref: 'Usuarios'},
 });
 
 module.exports = mongoose.model("Pructos", PructosSchema);

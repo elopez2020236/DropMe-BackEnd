@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const tratoP = Schema({
+const tratoC = Schema({
 
     Usuario1:{ type: Schema.Types.ObjectId, ref: 'Usuarios'},
     Producto1:{ type: Schema.Types.ObjectId, ref: 'Pructos'},
@@ -11,4 +11,4 @@ const tratoP = Schema({
     estado:Boolean,
 });
 
-module.exports = mongoose.model("tratoP", tratoP);
+module.exports = mongoose.model("tratoC", tratoC);
