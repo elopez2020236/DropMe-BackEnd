@@ -27,7 +27,7 @@ function AddProducto(req,res){
                         if(err){
                             return res.status(500).send({mensaje:'error en la peticion'})
                         }else if(productoSaved){
-                                Usuario.findByIdAndUpdate(user,{$push:{Productos:productoSaved},(err,pruducto)})
+                                Usuario.findByIdAndUpdate(user,{$push:{Productos:productoSaved}},(err,productoupdetes))
                         }else{
                             return res.status(500).send({mensaje:'error al crear el producto'})
                         }
