@@ -1,16 +1,44 @@
 var Producto = require("../models/productos.model");
 var Categoria = require("../models/categoria.model");
+var Usuario= require("../controller/usuario.controller")
 
 //Add Producto (Crear productos)
 function AddProducto(req,res){
-    var idCat = req.params.idCat;
+    var categoria = parametros.categoria;
     var parametros = req.body;
     var modelProductos = new Producto();
+    var user = req.user.sub
 
     if(parametros.nombre && parametros.precio && parametros.category){
-        Categoria.findById(idCat,(err, categoriaEncontrada)=>{
+        Categoria.findOne({nombre: categoria },(err, categoriaEncontrada)=>{
 
-            if(err) return res.status(500).send({mensaje:'Error en la petición (Producto):('});
+
+            
+            
+            if(err){
+                return res.status(500).send({mensaje:'erro en la petición 1'})
+            }else if(categoriaEncontrada){
+                    modelProductos.nombre= parametros.nombre;
+                    modelProductos.precio = parametros.precio;
+                    modelProductos.category = categoria;
+                    modelProductos.fotos = [];
+                    modelProductos.factura = [];
+                    modelProductos.save((err,productoSaved)=>{
+                        if(err){
+                            return res.status(500).send({mensaje:'error en la peticion'})
+                        }else if(productoSaved){
+                                Usuario.findByIdAndUpdate(user,{$push:{Productos:productoSaved},(err,pruducto)})
+                        }else{
+                            return res.status(500).send({mensaje:'error al crear el producto'})
+                        }
+                    })
+
+
+
+            }else{
+                return res.status(500).send({mensaje:'error al encontrar la categoria'})            
+            }
+            /*if(err) return res.status(500).send({mensaje:'Error en la petición (Producto):('});
             if(categoriaEncontrada){
                 Producto.findOne({nombre: parametros.nombre},(err, productoEncontrado)=>{
                     if(err) return res.status(500).send({mensaje:'Error en la petición (Producto) :('});
@@ -36,7 +64,7 @@ function AddProducto(req,res){
                         })
                     }
                 })                 
-            }
+            }*/
         })
     }else{
         return res.status(500).send({mensaje:'Ingrese los datos correctamente :('})

@@ -6,7 +6,6 @@ function Nuevotrato(req,res){
 var userId = req.user.sub;
 
 
-
 }
 module.exports ={
     Nuevotrato

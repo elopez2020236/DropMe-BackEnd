@@ -8,7 +8,8 @@ const UsuarioSchema = Schema({
   usuario: String,
   password: String,
   rol: String,
-  Productos:[{ type: Schema.Types.ObjectId, ref: 'FactPructosura'}]
+  Productos:[{ type: Schema.Types.ObjectId, ref: 'FactPructosura'}],
+  Solicitudes:[{ type: Schema.Types.ObjectId, ref: 'Pructos'}]
 });
 
 module.exports = mongoose.model("Usuarios", UsuarioSchema);
