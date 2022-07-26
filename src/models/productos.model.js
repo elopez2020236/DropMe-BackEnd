@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PructosSchema = Schema({
   nombre: String,
-  category: String,
+  categoria: String,
   precio: String,
   fotos:[],
   factura:[{ type: Schema.Types.ObjectId, ref: 'Pructos'}],

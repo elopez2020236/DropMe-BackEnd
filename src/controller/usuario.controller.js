@@ -11,7 +11,8 @@ function RegistrarAd(req, res) {
     usuarioModelo.email = "Superadmin";
     usuarioModelo.rol = "ADMIN";
     usuarioModelo.password = "12345";
-  
+    usuarioModelo.Productos.idProducto = null
+    usuarioModelo.Solicitudes= 123
     Usuario.find({
       $or: [{ usuario: usuarioModelo.usuario }],
     }).exec((err, buscarUsuario) => {
@@ -157,7 +158,7 @@ function RegistrarAd(req, res) {
 
 
     function eliminarUsuario(req,res){
-        var userId = req.params.id;
+        var userId = req.params.idPro;
     
         Usuario.findById(userId,(err,userFinded)=>{
             if(err){
@@ -178,6 +179,12 @@ function RegistrarAd(req, res) {
         })
     }
 
+
+    function obtenerSolis(req,res){
+
+
+      
+    }
 
 
   module.exports ={
