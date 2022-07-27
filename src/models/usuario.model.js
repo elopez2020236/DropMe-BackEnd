@@ -9,9 +9,7 @@ const UsuarioSchema = Schema({
   password: String,
   rol: String,
   Productos:[ { type: Schema.Types.ObjectId, ref: 'Pructos'}],
-
-
-   Solicitudes:[{ type: Schema.Types.ObjectId, ref: 'Pructos'}]
+  Solicitudes:[{ type: Schema.Types.ObjectId, ref: 'solicutudes'}]
 
 
 });
