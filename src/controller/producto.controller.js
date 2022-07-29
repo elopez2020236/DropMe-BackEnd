@@ -142,7 +142,6 @@ function eliminarProudcto(req, res) {
 
 function ObtenerProductosMain(req, res) {
 
-
     Producto.find((err, productos) => {
         if (err) {
             return res.status(200).send({ mensaje: 'erro en la peticion' })
