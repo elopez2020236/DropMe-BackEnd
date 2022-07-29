@@ -199,7 +199,6 @@ function obtenerxId(req, res) {
 }
 
 module.exports = {
-
     AddProducto,
     editarProducto,
     eliminarProudcto,
