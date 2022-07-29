@@ -155,7 +155,7 @@ function ObtenerProductosMain(req, res) {
 
 }
 
-//Obtener un producto en específico
+//Obtener 1 producto en específico
 function ObtenerProductoId(req, res) {
     const idPro = req.params.idProducto;
 
