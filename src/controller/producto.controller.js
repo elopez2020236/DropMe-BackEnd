@@ -17,7 +17,7 @@ function AddProducto(req, res) {
 
 
             if (err) {
-                return res.status(500).send({ mensaje: 'erro en la petición 1' })
+                return res.status(500).send({ mensaje: 'Error en la petición 1' })
             } else if (categoriaEncontrada) {
                 modelProductos.nombre = parametros.nombre;
                 modelProductos.precio = parametros.precio;
@@ -27,43 +27,43 @@ function AddProducto(req, res) {
                 modelProductos.usuario = user
                 modelProductos.save((err, productoSaved) => {
                     if (err) {
-                        return res.status(500).send({ mensaje: 'error en la peticion 1' })
+                        return res.status(500).send({ mensaje: 'Error en la peticion 1' })
                     } else if (productoSaved) {
                         Usuario.findByIdAndUpdate(user, { $push: { Productos: productoSaved._id } }, (err, productoupdetes) => {
                             if (err) {
-                                return res.status(500).send({ mensaje: 'error en la peticion 2' });
+                                return res.status(500).send({ mensaje: 'Error en la peticion 2' });
                             } else if (productoupdetes) {
                                 Categoria.findByIdAndUpdate(categoriaEncontrada._id, { $push: { productos: productoSaved._id } }, (err, categoriaUpdated) => {
                                     if (err) {
-                                        return res.status(500).send({ mensaje: 'error en la petición 3' });
+                                        return res.status(500).send({ mensaje: 'Error en la petición 3' });
                                     } else if (categoriaUpdated) {
                                         let id = productoSaved._id
                                         Usuario.findByIdAndUpdate(user, { $push: { Producto: productoSaved._id } }, (err, userUpdates) => {
                                             if (err) {
-                                                return res.status(500).send({ mensaje: 'error en la peticion 4' });
+                                                return res.status(500).send({ mensaje: 'Error en la peticion 4' });
                                             } else if (userUpdates) {
-                                                return res.status(500).send({ mensaje: 'el profuctos se agrego correctamente', productoSaved })
+                                                return res.status(500).send({ mensaje: 'El producto se agregó correctamente', productoSaved })
                                             } else {
-                                                return res.status(500).send({ mensaje: 'error al agregar el pructos a el usuaria' })
+                                                return res.status(500).send({ mensaje: 'Error al agregar el producto a el usuario' })
                                             }
                                         })
                                     } else {
-                                        return res.status(500).send({ mensaje: 'erro al agregar el producto en la categoria' });
+                                        return res.status(500).send({ mensaje: 'Error al agregar el producto en la categoria' });
                                     }
                                 })
                             } else {
-                                return res.status(500).send({ mensaje: 'error al agregar el producto al usuario' })
+                                return res.status(500).send({ mensaje: 'Error al agregar el producto al usuario' })
                             }
                         })
                     } else {
-                        return res.status(500).send({ mensaje: 'error al crear el producto' })
+                        return res.status(500).send({ mensaje: 'Error al crear el producto' })
                     }
                 })
 
 
 
             } else {
-                return res.status(500).send({ mensaje: 'error al encontrar la categoria' })
+                return res.status(500).send({ mensaje: 'Error al encontrar la categoria' })
             }
             /*if(err) return res.status(500).send({mensaje:'Error en la petición (Producto):('});
             if(categoriaEncontrada){
