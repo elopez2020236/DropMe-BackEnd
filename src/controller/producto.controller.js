@@ -183,7 +183,23 @@ function ObtenerLog(req, res) {
     }).populate('Productos')
 
 }
+
+
+function obtenerxId(req, res) {
+    var id = req.paramas.idProducto
+    Producto.findById(id, (err, producFined) => {
+        if (err) {
+            return res.status(500).send({ mensaje: 'erro en la petiocn 1' });
+        } else if (producFined) {
+            return res.status(200).send({ mensaje: 'producto', producFined })
+        } else {
+            return res.status(500).send({ mensaje: 'error al obtener el producto' })
+        }
+    })
+}
+
 module.exports = {
+
     AddProducto,
     editarProducto,
     eliminarProudcto,
