@@ -17,7 +17,7 @@ function AddProducto(req, res) {
 
 
             if (err) {
-                return res.status(500).send({ mensaje: 'Error en la petición 1' })
+                return res.status(500).send({ mensaje: 'erro en la petición 1' })
             } else if (categoriaEncontrada) {
                 modelProductos.nombre = parametros.nombre;
                 modelProductos.precio = parametros.precio;
@@ -27,43 +27,43 @@ function AddProducto(req, res) {
                 modelProductos.usuario = user
                 modelProductos.save((err, productoSaved) => {
                     if (err) {
-                        return res.status(500).send({ mensaje: 'Error en la peticion 1' })
+                        return res.status(500).send({ mensaje: 'error en la peticion 1' })
                     } else if (productoSaved) {
-                        Usuario.findByIdAndUpdate(user, { $push: { Productos: productoSaved._id } }, (err, productoupdetes) => {
+                        Usuario.findByIdAndUpdate(user, { $push: { Productos: productoSaved._id } }, { new: true }, (err, productoupdetes) => {
                             if (err) {
-                                return res.status(500).send({ mensaje: 'Error en la peticion 2' });
+                                return res.status(500).send({ mensaje: 'error en la peticion 2' });
                             } else if (productoupdetes) {
                                 Categoria.findByIdAndUpdate(categoriaEncontrada._id, { $push: { productos: productoSaved._id } }, (err, categoriaUpdated) => {
                                     if (err) {
-                                        return res.status(500).send({ mensaje: 'Error en la petición 3' });
+                                        return res.status(500).send({ mensaje: 'error en la petición 3' });
                                     } else if (categoriaUpdated) {
                                         let id = productoSaved._id
-                                        Usuario.findByIdAndUpdate(user, { $push: { Producto: productoSaved._id } }, (err, userUpdates) => {
+                                        Usuario.findByIdAndUpdate(user, { $push: { Producto: productoSaved._id } }, { new: true }, (err, userUpdates) => {
                                             if (err) {
-                                                return res.status(500).send({ mensaje: 'Error en la peticion 4' });
+                                                return res.status(500).send({ mensaje: 'error en la peticion 4' });
                                             } else if (userUpdates) {
-                                                return res.status(500).send({ mensaje: 'El producto se agregó correctamente', productoSaved })
+                                                return res.status(500).send({ mensaje: 'el profuctos se agrego correctamente', productoSaved })
                                             } else {
-                                                return res.status(500).send({ mensaje: 'Error al agregar el producto a el usuario' })
+                                                return res.status(500).send({ mensaje: 'error al agregar el pructos a el usuaria' })
                                             }
                                         })
                                     } else {
-                                        return res.status(500).send({ mensaje: 'Error al agregar el producto en la categoria' });
+                                        return res.status(500).send({ mensaje: 'erro al agregar el producto en la categoria' });
                                     }
                                 })
                             } else {
-                                return res.status(500).send({ mensaje: 'Error al agregar el producto al usuario' })
+                                return res.status(500).send({ mensaje: 'error al agregar el producto al usuario' })
                             }
                         })
                     } else {
-                        return res.status(500).send({ mensaje: 'Error al crear el producto' })
+                        return res.status(500).send({ mensaje: 'error al crear el producto' })
                     }
                 })
 
 
 
             } else {
-                return res.status(500).send({ mensaje: 'Error al encontrar la categoria' })
+                return res.status(500).send({ mensaje: 'error al encontrar la categoria' })
             }
             /*if(err) return res.status(500).send({mensaje:'Error en la petición (Producto):('});
             if(categoriaEncontrada){
@@ -142,28 +142,17 @@ function eliminarProudcto(req, res) {
 
 function ObtenerProductosMain(req, res) {
 
+
     Producto.find((err, productos) => {
         if (err) {
-            return res.status(200).send({ mensaje: 'erro en la peticion' })
+            return res.status(500).send({ mensaje: 'erro en la peticion' })
         } else if (productos) {
-            return res.status(200).send({ mensaje: 'Productos', productos })
+            return res.status(500).send({ mensaje: 'Prodectos', productos })
         } else {
-            return res.status(200).send({ mensaje: 'error al obtener los productos' })
+            return res.status(500).send({ mensaje: 'error al obtener los productos' })
         }
     })
 
-}
-
-//Obtener 1 producto en específico
-function ObtenerProductoId(req, res) {
-    const idPro = req.params.idProducto;
-
-    Productos.findById(idPro, (err, productoEncontrado) => {
-        if (err) return res.status(500).send({ mensaje: 'Error en la peticion' });
-        if (!productoEncontrado) return res.status(500).send({ mensaje: 'Error al obtener el producto' });
-
-        return res.status(200).send({ mensaje: productoEncontrado })
-    })
 }
 
 function ObtenerLog(req, res) {
@@ -183,7 +172,6 @@ function ObtenerLog(req, res) {
 
 }
 
-
 function obtenerxId(req, res) {
     var id = req.paramas.idProducto
     Producto.findById(id, (err, producFined) => {
@@ -196,12 +184,11 @@ function obtenerxId(req, res) {
         }
     })
 }
-
 module.exports = {
     AddProducto,
     editarProducto,
     eliminarProudcto,
     ObtenerProductosMain,
     ObtenerLog,
-    ObtenerProductoId
+    obtenerxId
 }
