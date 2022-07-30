@@ -9,5 +9,6 @@ api.put("/editarProducto/:idProductos", controladorProductos.editarProducto)
 api.delete("/eliminarProducto/:idProductos", md_autenticacion.Auth, controladorProductos.eliminarProudcto);
 api.get("/obtenerProductos", controladorProductos.ObtenerProductosMain);
 api.get("/obtenerProductosLog", md_autenticacion.Auth, controladorProductos.ObtenerLog);
+api.get('/producto/:idProducto', controladorProductos.obtenerxId);
 
 module.exports = api;
