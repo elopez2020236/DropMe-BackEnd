@@ -29,7 +29,7 @@ function AddProducto(req,res){
                         if(err){
                             return res.status(500).send({mensaje:'error en la peticion 1'})
                         }else if(productoSaved){
-                                Usuario.findByIdAndUpdate(user,{$push:{Productos:productoSaved._id}},(err,productoupdetes)=>{
+                                Usuario.findByIdAndUpdate(user,{$push:{Productos:productoSaved._id}},{new: true},(err,productoupdetes)=>{
                                     if(err){
                                         return res.status(500).send({mensaje:'error en la peticion 2'});
                                     }else if (productoupdetes){
@@ -38,7 +38,7 @@ function AddProducto(req,res){
                                                 return res.status(500).send({mensaje:'error en la petición 3'});
                                             }else if(categoriaUpdated){
                                                 let id = productoSaved._id
-                                                Usuario.findByIdAndUpdate(user,{$push:{Producto:productoSaved._id}},(err,userUpdates)=>{
+                                                Usuario.findByIdAndUpdate(user,{$push:{Producto:productoSaved._id}},{new: true},(err,userUpdates)=>{
                                                     if(err){
                                                         return res.status(500).send({mensaje:'error en la peticion 4'});
                                                     }else if (userUpdates){
@@ -161,7 +161,7 @@ function ObtenerLog(req,res){
     Usuario.findById(user,(err,userfinded)=>{
         if(err){
             return res.status(500).send({mensaje:'error en la peticion 1'})
-        }else if(userfinded){
+        }else if(userfinded ){
             let productos = userfinded.Productos;
            console.log(productos);
            return res.status(200).send({productos:productos})
