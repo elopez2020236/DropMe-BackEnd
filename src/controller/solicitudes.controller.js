@@ -3,6 +3,7 @@ const Productos = require('../models/productos.model');
 const Usuario = require('../models/usuario.model');
 const tratoP = require('../models/trado(pendiente).model');
 const tratoC= require('../models/trato(Confirmado).model');
+
 function solicitudes(req,res){
 
     var userid = req.user.sub;
@@ -40,7 +41,7 @@ function solicitudes(req,res){
                                         if(err){
                                             return res.status(500).send({mensaje:'error em peticion 2'});
                                         }else if(userUpdated){
-                                            return res.status(200).send({mensaje:'se agrego la solucitud correctamente',solicitudSaved}),console.log(userPr)
+                                            return res.status(200).send({mensaje:'se agrego la solucitud correctamente',solicitudSaved}),console.log(solicitudSaved._id)
                                         }else{
                                             return res.status(500).send({mensaje:'erro al agregar la solicitud'})
                                         }
@@ -134,6 +135,30 @@ function aceptarSolicitud(req,res){
 
 }
 
+function CancelarSoli(req,res){
+    idSoli= req.params.idSolicitud;
+    idUser= req.user.sub
+    Usuario.findByIdAndUpdate(idUser,{$pull:{Solicitudes:idSoli}},{new: true},(err, userUpdated)=>{
+        if(err){
+            return res.status(500).send({mesaje:'error en la peticion 1'})
+        }else if(userUpdated){
+            Solicutudes.findByIdAndDelete( idSoli, (err,soliDele)=>{
+                if(err){
+                    return res.status(500).send({mesaje:'error en la peticion 2'})
+                }else if (soliDele){
+                        return res.status(200).send({mensaje:'se rechazo la solicitud con exito',soliDele})
+                }else{
+                    return res.status(500).send({mensaje:'error al eliminar la solicitud'})
+                }
+            })
+
+        }else{
+            return res.status(500).send({mensaje:'error al remover la solicitud'})
+        }
+    })
+
+}
+
 
 function confirmarTrato(req,res){
         idtra = req.params.idTrato
@@ -197,11 +222,14 @@ function obtenerSolitudesLog(req,res){
         }
     }).populate('Solicitudes')
 }
+
 module.exports = {
     solicitudes,
     aceptarSolicitud,
     confirmarTrato,
-    obtenerSolitudesLog
+    obtenerSolitudesLog,
+    CancelarSoli,
+    ObternerSolicitudes
 
 
 }
