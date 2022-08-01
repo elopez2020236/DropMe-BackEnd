@@ -3,38 +3,39 @@ const jwt = require("../services/jwt");
 const bcrypt = require("bcrypt-nodejs");
 
 
-function RegistrarAd(req, res) {
-    let usuarioModelo = new Usuario();
-  
-    usuarioModelo.nombre = "SuperAdmin";
-    usuarioModelo.usuario = "SuperAdmin";
-    usuarioModelo.email = "Superadmin";
-    usuarioModelo.rol = "ADMIN";
-    usuarioModelo.password = "12345";
-    usuarioModelo.Productos.idProducto = null
-    usuarioModelo.Solicitudes= 123
-    Usuario.find({
-      $or: [{ usuario: usuarioModelo.usuario }],
-    }).exec((err, buscarUsuario) => {
-      if (err) return console.log("ERROR en la peticion");
-  
-      if (buscarUsuario && buscarUsuario.length >= 1) {
-        console.log("Usuario Super Admin creado con anterioridad");
+function RegistrarAd() {
+  var usuarioModel = new Usuario();
+
+  Usuario.findOne({ nombre: "SuperAdmin" }, (err, SuperAdminFinded) => {
+      if (err) {
+          console.log(err);
+      } else if (SuperAdminFinded) {
+          console.log("Usuario SuperAdmin ya fue creado");
       } else {
-        bcrypt.hash(usuarioModelo.password, null, null, (err, passCrypt) => {
-          usuarioModelo.password = passCrypt;
-        });
-  
-        usuarioModelo.save((err, usuarioGuardado) => {
-          if (err) return console.log("ERROR al crear el usuario Admin");
-  
-          if (usuarioGuardado) {
-            console.log("Usuario Super Admin Creado");
-          }
-        });
+          bcrypt.hash("123456", null, null, (err, passwordHashed) => {
+              if (err) {
+                  console.log("Error al encriptar contraseña de SuperAdmin");
+              } else if (passwordHashed) {
+                  usuarioModel.password = passwordHashed;
+                  usuarioModel.nombre = "SuperAdmin";
+             
+                  usuarioModel.rol = "ROL_Admin";
+                  usuarioModel.save((err, userSaved) => {
+                      if (err) {
+                          console.log("Error al crear usuario SuperAdmin");
+                      } else if (userSaved) {
+                          console.log("Usuario SuperAdmin creado exitosamente");
+                      } else {
+                          console.log("No se creó el usuario SuperAdmin");
+                      }
+                  });
+              } else {
+                  console.log("Contraseña de SuperAdmin no encriptada");
+              }
+          });
       }
-    });
-  }
+  });
+}
 
   function RegistrarUsuario(req, res) {
     var parametros = req.body;
@@ -179,6 +180,18 @@ function RegistrarAd(req, res) {
         })
     }
 
+      function ObternerLog(req,res){
+        user= req.user.sub;
+        Usuario.findById(user,(err,userFinded)=>{
+          if(err){
+            return res.status(500).send({mensaje:'error en la peticion 1'});
+          }else if(userFinded){
+            return res.status(200).send({mensaje:'el usuario ',userFinded})
+          }else{
+            return res.status(500).send({mensaje:'error al obtener el usuario'})
+          }
+        })
+      }
 
     function obtenerSolis(req,res){
 
@@ -193,6 +206,7 @@ function RegistrarAd(req, res) {
     Login,
     EditarUsuario,
     eliminarUsuario,
+    ObternerLog,
   }
 
 

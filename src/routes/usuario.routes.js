@@ -9,5 +9,5 @@ api.post('/registrarUsuario',controladorUsuario.RegistrarUsuario);
 api.post('/login',controladorUsuario.Login);
 api.put('/editarUsario/:id',controladorUsuario.EditarUsuario);
 api.delete('/eliminarUsuario/:id',controladorUsuario.eliminarUsuario);
-
+api.get('/obterUserlog',md_autenticacion.Auth,controladorUsuario.ObternerLog)
 module.exports = api;

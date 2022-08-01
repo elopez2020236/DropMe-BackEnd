@@ -173,7 +173,7 @@ function ObtenerLog(req,res){
 }
 
 function obtenerxId(req,res){
-    var id = req.paramas.idProducto
+    var id = req.params.idProducto
     Producto.findById(id,(err,producFined)=>{
         if(err){
             return res.status(500).send({mensaje:'erro en la petiocn 1'});
